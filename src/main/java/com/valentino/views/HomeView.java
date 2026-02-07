@@ -3,6 +3,7 @@ package com.valentino.views;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -11,12 +12,19 @@ import com.vaadin.flow.router.Route;
 public class HomeView extends VerticalLayout {
 
     public HomeView() {
+        addClassName("home-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);
+        setJustifyContentMode(JustifyContentMode.CENTER);
+        
+        var image = new Image("hlg.gif", "Valentine GIF");
+        image.setWidth("200px");
+        
+        var title = new H1("Will you be my Valentine? 💕");
+        
         var layout = createButtonLayout();
 
-        add(new H1("Will you be my Valentine?"));
-        add(layout);
+        add(image, title, layout);
     }
 
     private HorizontalLayout createButtonLayout() {

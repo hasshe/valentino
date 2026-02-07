@@ -1,0 +1,35 @@
+/* Valentine's Theme */
+html {
+  --lumo-primary-color: #e91e63;
+  --lumo-primary-text-color: #c2185b;
+  --lumo-primary-color-50pct: rgba(233, 30, 99, 0.5);
+  --lumo-primary-color-10pct: rgba(233, 30, 99, 0.1);
+}
+
+.home-view {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+  min-height: 100vh;
+}
+
+.home-view h1 {
+  color: #c2185b;
+  font-family: "Georgia", serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home-view vaadin-button[theme~="primary"] {
+  background: linear-gradient(135deg, #e91e63, #ff6090);
+  border-radius: 25px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+.home-view vaadin-button[theme~="primary"]:hover {
+  background: linear-gradient(135deg, #c2185b, #e91e63);
+}
+
+.home-view vaadin-button[theme~="tertiary"] {
+  color: #880e4f;
+  border-radius: 25px;
+  font-weight: bold;
+}
