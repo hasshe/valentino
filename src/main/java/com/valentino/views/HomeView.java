@@ -11,6 +11,8 @@ import com.vaadin.flow.router.Route;
 public class HomeView extends VerticalLayout {
 
     public HomeView() {
+        setSizeFull();
+        setAlignItems(Alignment.CENTER);
         var layout = createButtonLayout();
 
         add(new H1("Will you be my Valentine?"));
