@@ -3,6 +3,7 @@ package com.valentino.views;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.card.Card;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -15,6 +16,9 @@ public class HomeView extends VerticalLayout {
     private Image popupGif;
     private Image valentinesGif;
     private Card card;
+    private Div contractOverlay;
+    private H1 title;
+    private HorizontalLayout buttonLayout;
 
     public HomeView() {
         addClassName("home-view");
@@ -22,17 +26,49 @@ public class HomeView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         
-        valentinesGif = createValentineGif();
+        createValentineGif();
         
         configurePopupGif();
         
-        var title = new H1("Will you be my Valentine? 💕");
+        configureTitle();
     
         configureCard();
+        configureContractOverlay();
 
-        var layout = createButtonLayout();
+        createButtonLayout();
 
-        add(valentinesGif, title, layout, popupGif, card);
+        add(valentinesGif, title, buttonLayout, popupGif, card, contractOverlay);
+    }
+
+    private void configureTitle() {
+        title = new H1("Will you be my Valentine? 💕");
+    }
+
+    private void configureContractOverlay() {
+        contractOverlay = new Div();
+        contractOverlay.setId("contract-overlay");
+        contractOverlay.setVisible(false);
+        
+        Image contractImage = new Image("gpt-contract.png", "Valentine Contract");
+        contractImage.getStyle()
+            .set("max-width", "90%")
+            .set("max-height", "90%")
+            .set("object-fit", "contain");
+        
+        contractOverlay.add(contractImage);
+        
+        contractOverlay.getStyle()
+            .set("position", "fixed")
+            .set("top", "0")
+            .set("left", "0")
+            .set("width", "100vw")
+            .set("height", "100vh")
+            .set("background", "rgba(0, 0, 0, 0.9)")
+            .set("display", "flex")
+            .set("align-items", "center")
+            .set("justify-content", "center")
+            .set("z-index", "99999");
+
     }
 
     private void configureCard() {
@@ -49,10 +85,10 @@ public class HomeView extends VerticalLayout {
         card.setMedia(new Image());
     }
 
-    private Image createValentineGif() {
+    private void createValentineGif() {
         valentinesGif = new Image("hlg.gif", "Valentine GIF");
         valentinesGif.setWidth("200px");
-        return valentinesGif;
+        valentinesGif.setHeight("200px");
     }
 
     private void configurePopupGif() {
@@ -67,7 +103,7 @@ public class HomeView extends VerticalLayout {
             .set("display", "none");
     }
 
-    private HorizontalLayout createButtonLayout() {
+    private void createButtonLayout() {
         var yesButton = createButton("YES");
         var noButton = createButton("NO");
 
@@ -77,10 +113,9 @@ public class HomeView extends VerticalLayout {
         setReactiveNoButton(noButton);
 
         yesButton.addClickListener(event -> {
-            yesButton.setText("Clicked!");
-            card.setVisible(true);
+            contractOverlay.setVisible(true);
         });
-        return new HorizontalLayout(yesButton, noButton);
+        buttonLayout = new HorizontalLayout(yesButton, noButton);
     }
 
     private void setReactiveNoButton(Button noButton) {
