@@ -2,6 +2,7 @@ package com.valentino.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.card.Card;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -12,6 +13,8 @@ import com.vaadin.flow.router.Route;
 public class HomeView extends VerticalLayout {
 
     private Image popupGif;
+    private Image valentinesGif;
+    private Card card;
 
     public HomeView() {
         addClassName("home-view");
@@ -19,11 +22,41 @@ public class HomeView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         
-        var image = new Image("hlg.gif", "Valentine GIF");
-        image.setWidth("200px");
+        valentinesGif = createValentineGif();
         
-        // Create a popup GIF that appears when button moves
-        popupGif = new Image("hlg.gif", "Nope!");
+        configurePopupGif();
+        
+        var title = new H1("Will you be my Valentine? 💕");
+    
+        configureCard();
+
+        var layout = createButtonLayout();
+
+        add(valentinesGif, title, layout, popupGif, card);
+    }
+
+    private void configureCard() {
+        card = new Card();
+        card.setWidth("300px");
+        card.setHeight("200px");
+        card.setVisible(false);
+        card.add(new H1("Yay! Happy Valentine's Day!"));
+        card.getStyle()
+            .set("display", "flex")
+            .set("flex-direction", "column")
+            .set("align-items", "center")
+            .set("justify-content", "center");
+        card.setMedia(new Image());
+    }
+
+    private Image createValentineGif() {
+        valentinesGif = new Image("hlg.gif", "Valentine GIF");
+        valentinesGif.setWidth("200px");
+        return valentinesGif;
+    }
+
+    private void configurePopupGif() {
+        popupGif = new Image("tgg.gif", "Nope!");
         popupGif.setId("popup-gif");
         popupGif.getStyle()
             .set("position", "fixed")
@@ -32,12 +65,6 @@ public class HomeView extends VerticalLayout {
             .set("z-index", "10000")
             .set("pointer-events", "none")
             .set("display", "none");
-        
-        var title = new H1("Will you be my Valentine? 💕");
-        
-        var layout = createButtonLayout();
-
-        add(image, title, layout, popupGif);
     }
 
     private HorizontalLayout createButtonLayout() {
@@ -47,6 +74,16 @@ public class HomeView extends VerticalLayout {
         yesButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         noButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
+        setReactiveNoButton(noButton);
+
+        yesButton.addClickListener(event -> {
+            yesButton.setText("Clicked!");
+            card.setVisible(true);
+        });
+        return new HorizontalLayout(yesButton, noButton);
+    }
+
+    private void setReactiveNoButton(Button noButton) {
         noButton.getElement().executeJs(
             "var btn = this;" +
             "btn.addEventListener('mouseenter', function() {" +
@@ -63,21 +100,11 @@ public class HomeView extends VerticalLayout {
             "    gif.style.left = randomX + 'px';" +
             "    gif.style.top = (randomY - 160) + 'px';" +
             "    gif.style.display = 'block';" +
-            "    gif.src = 'hlg.gif?' + new Date().getTime();" +
+            "    gif.src = 'tgg.gif?' + new Date().getTime();" +
             "    setTimeout(function() { gif.style.display = 'none'; }, 1000);" +
             "  }" +
             "});"
         );
-
-        yesButton.addClickListener(event -> {
-            yesButton.setText("Clicked!");
-            noButton.setText("NO");
-        });
-        noButton.addClickListener(event -> {
-            noButton.setText("Clicked!");
-            yesButton.setText("YES");
-        });
-        return new HorizontalLayout(yesButton, noButton);
     }
 
     private Button createButton(String text) {
