@@ -49,7 +49,7 @@ public class HomeView extends VerticalLayout {
         contractOverlay.setId("contract-overlay");
         contractOverlay.setVisible(false);
         
-        Image contractImage = new Image("gpt-contract.png", "Valentine Contract");
+        Image contractImage = new Image("placeholder.png", "Valentine Contract");
         contractImage.getStyle()
             .set("max-width", "90%")
             .set("max-height", "90%")
