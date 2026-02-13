@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.Route;
 
 @Route("")
@@ -19,8 +20,17 @@ public class HomeView extends VerticalLayout {
     private Div contractOverlay;
     private H1 title;
     private HorizontalLayout buttonLayout;
+    private Select<String> themeSelector = new Select<>();
 
     public HomeView() {
+        themeSelector.setLabel("Theme Selector");
+        themeSelector.setItems("Halloween", "Easter", "Valentine", "Christmas");
+        themeSelector.setValue("Valentine");
+
+        themeSelector.addValueChangeListener(event -> {
+            String theme = event.getValue();
+            IO.println(theme);
+        });
         addClassName("home-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -37,7 +47,7 @@ public class HomeView extends VerticalLayout {
 
         createButtonLayout();
 
-        add(valentinesGif, title, buttonLayout, popupGif, card, contractOverlay);
+        add(themeSelector, valentinesGif, title, buttonLayout, popupGif, card, contractOverlay);
     }
 
     private void configureTitle() {
@@ -49,7 +59,7 @@ public class HomeView extends VerticalLayout {
         contractOverlay.setId("contract-overlay");
         contractOverlay.setVisible(false);
         
-        Image contractImage = new Image("placeholder.png", "Valentine Contract");
+        Image contractImage = new Image("place.png", "Valentine Contract");
         contractImage.getStyle()
             .set("max-width", "90%")
             .set("max-height", "90%")
