@@ -22,16 +22,39 @@ public class HomeView extends VerticalLayout {
     private HorizontalLayout buttonLayout;
     private Select<String> themeSelector = new Select<>();
 
+    private static final String VALENTINE_THEME_CLASS = "home-view-valentines";
+    private static final String EASTER_THEME_CLASS = "home-view-easter";
+
     public HomeView() {
         themeSelector.setLabel("Theme Selector");
         themeSelector.setItems("Halloween", "Easter", "Valentine", "Christmas");
         themeSelector.setValue("Valentine");
+        IO.print(themeSelector.getValue());
 
         themeSelector.addValueChangeListener(event -> {
             String theme = event.getValue();
-            IO.println(theme);
+                switch (theme) {
+                    case "Halloween":
+                        getElement().setAttribute("theme", "halloween");
+                        break;
+                    case "Easter":
+                        addClassName(EASTER_THEME_CLASS);
+                        break;
+                    case "Valentine":
+                        removeClassName(EASTER_THEME_CLASS);
+                        addClassName(VALENTINE_THEME_CLASS);
+                        break;
+                    case "Christmas":
+                        getElement().setAttribute("theme", "christmas");
+                        break;
+                    default:
+                        addClassName(VALENTINE_THEME_CLASS);
+                }
         });
-        addClassName("home-view");
+
+        if (themeSelector.getValue().equals("Valentine")) {
+            addClassName(VALENTINE_THEME_CLASS);
+        }
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);

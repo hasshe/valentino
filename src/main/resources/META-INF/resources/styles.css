@@ -6,30 +6,58 @@ html {
   --lumo-primary-color-10pct: rgba(233, 30, 99, 0.1);
 }
 
-.home-view {
+.home-view-valentines {
   background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
   min-height: 100vh;
 }
 
-.home-view h1 {
+.home-view-valentines h1 {
   color: #c2185b;
   font-family: "Georgia", serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.home-view vaadin-button[theme~="primary"] {
+.home-view-valentines vaadin-button[theme~="primary"] {
   background: linear-gradient(135deg, #e91e63, #ff6090);
   border-radius: 25px;
   font-weight: bold;
   padding: 0 30px;
 }
 
-.home-view vaadin-button[theme~="primary"]:hover {
+.home-view-valentines vaadin-button[theme~="primary"]:hover {
   background: linear-gradient(135deg, #c2185b, #e91e63);
 }
 
-.home-view vaadin-button[theme~="tertiary"] {
+.home-view-valentines vaadin-button[theme~="tertiary"] {
   color: #880e4f;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.home-view-easter {
+  background: linear-gradient(135deg, #e8db65 0%, #9ffcb3 50%, #b2ff9a 100%);
+  min-height: 100vh;
+}
+
+.home-view-easter h1 {
+  color: #c2185b;
+  font-family: "Georgia", serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home-view-easter vaadin-button[theme~="primary"] {
+  background: linear-gradient(135deg, #1ee925, #ecff60);
+  border-radius: 25px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+.home-view-easter vaadin-button[theme~="primary"]:hover {
+  background: linear-gradient(135deg, #18c21e, #1ee9bd);
+}
+
+.home-view-easter vaadin-button[theme~="tertiary"] {
+  color: #14880e;
   border-radius: 25px;
   font-weight: bold;
 }
