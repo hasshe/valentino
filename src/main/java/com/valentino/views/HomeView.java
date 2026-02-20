@@ -24,6 +24,8 @@ public class HomeView extends VerticalLayout {
 
     private static final String VALENTINE_THEME_CLASS = "home-view-valentines";
     private static final String EASTER_THEME_CLASS = "home-view-easter";
+    private static final String HALLOWEEN_THEME_CLASS = "home-view-hallow";
+    private static final String CHRISTMAS_THEME_CLASS = "home-view-christmas";
 
     public HomeView() {
         themeSelector.setLabel("Theme Selector");
@@ -35,17 +37,26 @@ public class HomeView extends VerticalLayout {
             String theme = event.getValue();
                 switch (theme) {
                     case "Halloween":
-                        getElement().setAttribute("theme", "halloween");
+                        removeClassName(CHRISTMAS_THEME_CLASS);
+                        removeClassName(EASTER_THEME_CLASS);
+                        addClassName(HALLOWEEN_THEME_CLASS);
                         break;
                     case "Easter":
+                        removeClassName(CHRISTMAS_THEME_CLASS);
+                        removeClassName(HALLOWEEN_THEME_CLASS);
                         addClassName(EASTER_THEME_CLASS);
                         break;
                     case "Valentine":
+                        removeClassName(CHRISTMAS_THEME_CLASS);
                         removeClassName(EASTER_THEME_CLASS);
+                        removeClassName(HALLOWEEN_THEME_CLASS);
                         addClassName(VALENTINE_THEME_CLASS);
                         break;
                     case "Christmas":
-                        getElement().setAttribute("theme", "christmas");
+                        removeClassName(VALENTINE_THEME_CLASS);
+                        removeClassName(EASTER_THEME_CLASS);
+                        removeClassName(HALLOWEEN_THEME_CLASS);
+                        addClassName(CHRISTMAS_THEME_CLASS);
                         break;
                     default:
                         addClassName(VALENTINE_THEME_CLASS);
@@ -58,13 +69,9 @@ public class HomeView extends VerticalLayout {
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
-        
         createValentineGif();
-        
         configurePopupGif();
-        
         configureTitle();
-    
         configureCard();
         configureContractOverlay();
 

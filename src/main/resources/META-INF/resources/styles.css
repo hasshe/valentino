@@ -1,63 +1,119 @@
 /* Valentine's Theme */
 html {
-  --lumo-primary-color: #e91e63;
-  --lumo-primary-text-color: #c2185b;
-  --lumo-primary-color-50pct: rgba(233, 30, 99, 0.5);
-  --lumo-primary-color-10pct: rgba(233, 30, 99, 0.1);
+  --lumo-primary-color: #ff4f81;
+  --lumo-primary-text-color: #d7263d;
+  --lumo-primary-color-50pct: rgba(255, 79, 129, 0.5);
+  --lumo-primary-color-10pct: rgba(255, 79, 129, 0.1);
 }
 
 .home-view-valentines {
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+  background: linear-gradient(135deg, #ffe5ec 0%, #ffb6c1 50%, #ff4f81 100%);
   min-height: 100vh;
 }
 
 .home-view-valentines h1 {
-  color: #c2185b;
+  color: #d7263d;
   font-family: "Georgia", serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .home-view-valentines vaadin-button[theme~="primary"] {
-  background: linear-gradient(135deg, #e91e63, #ff6090);
+  background: linear-gradient(135deg, #ff4f81, #ffb6c1);
   border-radius: 25px;
   font-weight: bold;
   padding: 0 30px;
 }
 
 .home-view-valentines vaadin-button[theme~="primary"]:hover {
-  background: linear-gradient(135deg, #c2185b, #e91e63);
+  background: linear-gradient(135deg, #d7263d, #ff4f81);
 }
 
 .home-view-valentines vaadin-button[theme~="tertiary"] {
-  color: #880e4f;
+  color: #d7263d;
   border-radius: 25px;
   font-weight: bold;
 }
 
 .home-view-easter {
-  background: linear-gradient(135deg, #e8db65 0%, #9ffcb3 50%, #b2ff9a 100%);
+  background: linear-gradient(135deg, #fff9c4 0%, #b2ff9a 50%, #b2e1ff 100%);
   min-height: 100vh;
 }
 
 .home-view-easter h1 {
-  color: #c2185b;
+  color: #7b5e57;
   font-family: "Georgia", serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .home-view-easter vaadin-button[theme~="primary"] {
-  background: linear-gradient(135deg, #1ee925, #ecff60);
+  background: linear-gradient(135deg, #b2ff9a, #b2e1ff);
   border-radius: 25px;
   font-weight: bold;
   padding: 0 30px;
 }
 
 .home-view-easter vaadin-button[theme~="primary"]:hover {
-  background: linear-gradient(135deg, #18c21e, #1ee9bd);
+  background: linear-gradient(135deg, #fff9c4, #b2ff9a);
 }
 
 .home-view-easter vaadin-button[theme~="tertiary"] {
-  color: #14880e;
+  color: #7b5e57;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.home-view-hallow {
+  background: linear-gradient(135deg, #ff7518 0%, #222 50%, #ffb347 100%);
+  min-height: 100vh;
+}
+
+.home-view-hallow h1 {
+  color: #222;
+  font-family: "Georgia", serif;
+  text-shadow: 2px 2px 4px rgba(255, 117, 24, 0.2);
+}
+
+.home-view-hallow vaadin-button[theme~="primary"] {
+  background: linear-gradient(135deg, #ff7518, #222);
+  border-radius: 25px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+.home-view-hallow vaadin-button[theme~="primary"]:hover {
+  background: linear-gradient(135deg, #222, #ff7518);
+}
+
+.home-view-hallow vaadin-button[theme~="tertiary"] {
+  color: #ff7518;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.home-view-christmas {
+  background: linear-gradient(135deg, #008000 0%, #ca0d0d 50%, #fff 100%);
+  min-height: 100vh;
+}
+
+.home-view-christmas h1 {
+  color: #008000;
+  font-family: "Georgia", serif;
+  text-shadow: 2px 2px 4px rgba(202, 13, 13, 0.2);
+}
+
+.home-view-christmas vaadin-button[theme~="primary"] {
+  background: linear-gradient(135deg, #ca0d0d, #008000);
+  border-radius: 25px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+.home-view-christmas vaadin-button[theme~="primary"]:hover {
+  background: linear-gradient(135deg, #008000, #ca0d0d);
+}
+
+.home-view-christmas vaadin-button[theme~="tertiary"] {
+  color: #008000;
   border-radius: 25px;
   font-weight: bold;
 }
