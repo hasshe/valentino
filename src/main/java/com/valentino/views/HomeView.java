@@ -37,8 +37,7 @@ public class HomeView extends VerticalLayout {
     public HomeView() {
         themeSelector.setLabel(THEME_SELECTOR_LABEL);
         themeSelector.setItems(HALLOWEEN_THEME, EASTER_THEME, VALENTINE_THEME, CHRISTMAS_THEME);
-        themeSelector.setValue(VALENTINE_THEME);
-
+        setDefaultThemeBasedOnDate();
         setHolidayTheme();
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -49,6 +48,23 @@ public class HomeView extends VerticalLayout {
         createButtonLayout();
 
         add(themeSelector, valentinesGif, title, buttonLayout, popupGif, card, contractOverlay);
+    }
+
+    private void setDefaultThemeBasedOnDate() {
+        var month = java.time.LocalDate.now().getMonth();
+        switch (month) {
+            case DECEMBER:
+                themeSelector.setValue(CHRISTMAS_THEME);
+                break;
+            case OCTOBER:
+                themeSelector.setValue(HALLOWEEN_THEME);
+                break;
+            case APRIL:
+                themeSelector.setValue(EASTER_THEME);
+                break;
+            default:
+                themeSelector.setValue(VALENTINE_THEME);
+        }
     }
 
     private void setHolidayTheme() {
