@@ -27,18 +27,23 @@ public class HomeView extends VerticalLayout {
     private static final String HALLOWEEN_THEME_CLASS = "home-view-hallow";
     private static final String CHRISTMAS_THEME_CLASS = "home-view-christmas";
 
+    private static final String CHRISTMAS_THEME = "Christmas";
+    private static final String EASTER_THEME = "Easter";
+    private static final String HALLOWEEN_THEME = "Halloween";
+    private static final String VALENTINE_THEME = "Valentine";
+
+    private static final String THEME_SELECTOR_LABEL = "Theme Selector";
+
     public HomeView() {
-        themeSelector.setLabel("Theme Selector");
-        themeSelector.setItems("Halloween", "Easter", "Valentine", "Christmas");
-        themeSelector.setValue("Valentine");
-        IO.print(themeSelector.getValue());
+        themeSelector.setLabel(THEME_SELECTOR_LABEL);
+        themeSelector.setItems(HALLOWEEN_THEME, EASTER_THEME, VALENTINE_THEME, CHRISTMAS_THEME);
+        themeSelector.setValue(VALENTINE_THEME);
 
         setHolidayTheme();
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         configurePopupGif();
-        configureTitle();
         configureCard();
         configureContractOverlay();
 
@@ -48,63 +53,65 @@ public class HomeView extends VerticalLayout {
     }
 
     private void setHolidayTheme() {
-        themeSelector.addValueChangeListener(event -> {
-            String theme = event.getValue();
-                switch (theme) {
-                    case "Halloween":
-                        removeClassName(CHRISTMAS_THEME_CLASS);
-                        removeClassName(EASTER_THEME_CLASS);
-                        addClassName(HALLOWEEN_THEME_CLASS);
-                        createValentineGif("hallo.gif");
-                        break;
-                    case "Easter":
-                        removeClassName(CHRISTMAS_THEME_CLASS);
-                        removeClassName(HALLOWEEN_THEME_CLASS);
-                        addClassName(EASTER_THEME_CLASS);
-                        createValentineGif("pengu.gif");
-                        break;
-                    case "Valentine":
-                        removeClassName(CHRISTMAS_THEME_CLASS);
-                        removeClassName(EASTER_THEME_CLASS);
-                        removeClassName(HALLOWEEN_THEME_CLASS);
-                        addClassName(VALENTINE_THEME_CLASS);
-                        createValentineGif("hlg.gif");
-                        break;
-                    case "Christmas":
-                        removeClassName(VALENTINE_THEME_CLASS);
-                        removeClassName(EASTER_THEME_CLASS);
-                        removeClassName(HALLOWEEN_THEME_CLASS);
-                        addClassName(CHRISTMAS_THEME_CLASS);
-                        createValentineGif("chrm.gif");
-                        break;
-                    default:
-                        addClassName(VALENTINE_THEME_CLASS);
-                }
-        });
+        themeSelector.addValueChangeListener(event -> applyTheme(event.getValue()));
+        applyTheme(themeSelector.getValue());
+    }
 
-        if (themeSelector.getValue().equals("Valentine")) {
-            addClassName(VALENTINE_THEME_CLASS);
-            createValentineGif("hlg.gif");
+    private void applyTheme(String theme) {
+        switch (theme) {
+            case HALLOWEEN_THEME:
+                removeClassName(CHRISTMAS_THEME_CLASS);
+                removeClassName(EASTER_THEME_CLASS);
+                addClassName(HALLOWEEN_THEME_CLASS);
+                createHolidayGif("hallo.gif");
+                configureTitle("Will you be my pumpkin? 🎃");
+                break;
+            case EASTER_THEME:
+                removeClassName(CHRISTMAS_THEME_CLASS);
+                removeClassName(HALLOWEEN_THEME_CLASS);
+                addClassName(EASTER_THEME_CLASS);
+                createHolidayGif("pengu.gif");
+                configureTitle("Will you be my easter bunny? 🐰");
+                break;
+            case VALENTINE_THEME:
+                removeClassName(CHRISTMAS_THEME_CLASS);
+                removeClassName(EASTER_THEME_CLASS);
+                removeClassName(HALLOWEEN_THEME_CLASS);
+                addClassName(VALENTINE_THEME_CLASS);
+                createHolidayGif("hlg.gif");
+                configureTitle("Will you be my valentine? ❤️");
+                break;
+            case CHRISTMAS_THEME:
+                removeClassName(VALENTINE_THEME_CLASS);
+                removeClassName(EASTER_THEME_CLASS);
+                removeClassName(HALLOWEEN_THEME_CLASS);
+                addClassName(CHRISTMAS_THEME_CLASS);
+                createHolidayGif("chrm.gif");
+                configureTitle("Will you be my christmas present? 🎁");
+                break;
+            default:
+                addClassName(VALENTINE_THEME_CLASS);
         }
     }
 
-    private void configureTitle() {
-        title = new H1("Will you be my Valentine? 💕");
+    private void configureTitle(String titleText) {
+        if (title == null) {
+            title = new H1(titleText);
+        } else {
+            title.setText(titleText);
+        }
     }
 
     private void configureContractOverlay() {
         contractOverlay = new Div();
         contractOverlay.setId("contract-overlay");
         contractOverlay.setVisible(false);
-        
         Image contractImage = new Image("place.png", "Valentine Contract");
         contractImage.getStyle()
             .set("max-width", "90%")
             .set("max-height", "90%")
             .set("object-fit", "contain");
-        
         contractOverlay.add(contractImage);
-        
         contractOverlay.getStyle()
             .set("position", "fixed")
             .set("top", "0")
@@ -116,7 +123,6 @@ public class HomeView extends VerticalLayout {
             .set("align-items", "center")
             .set("justify-content", "center")
             .set("z-index", "99999");
-
     }
 
     private void configureCard() {
@@ -133,7 +139,7 @@ public class HomeView extends VerticalLayout {
         card.setMedia(new Image());
     }
 
-    private void createValentineGif(String src) {
+    private void createHolidayGif(String src) {
         if (valentinesGif == null) {
             valentinesGif = new Image(src, "GIF");
             valentinesGif.setWidth("200px");
