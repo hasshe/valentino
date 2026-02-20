@@ -45,7 +45,6 @@ public class HomeView extends VerticalLayout {
         setJustifyContentMode(JustifyContentMode.CENTER);
         configurePopupGif();
         configureCard();
-        configureContractOverlay();
 
         createButtonLayout();
 
@@ -65,6 +64,7 @@ public class HomeView extends VerticalLayout {
                 addClassName(HALLOWEEN_THEME_CLASS);
                 createHolidayGif("hallo.gif");
                 configureTitle("Will you be my pumpkin? 🎃");
+                configureContractOverlay("hallowcont.png");
                 break;
             case EASTER_THEME:
                 removeClassName(CHRISTMAS_THEME_CLASS);
@@ -72,6 +72,7 @@ public class HomeView extends VerticalLayout {
                 addClassName(EASTER_THEME_CLASS);
                 createHolidayGif("pengu.gif");
                 configureTitle("Will you be my easter bunny? 🐰");
+                configureContractOverlay("eastbny.png");
                 break;
             case VALENTINE_THEME:
                 removeClassName(CHRISTMAS_THEME_CLASS);
@@ -80,6 +81,7 @@ public class HomeView extends VerticalLayout {
                 addClassName(VALENTINE_THEME_CLASS);
                 createHolidayGif("hlg.gif");
                 configureTitle("Will you be my valentine? ❤️");
+                configureContractOverlay("valcont.png");
                 break;
             case CHRISTMAS_THEME:
                 removeClassName(VALENTINE_THEME_CLASS);
@@ -88,6 +90,7 @@ public class HomeView extends VerticalLayout {
                 addClassName(CHRISTMAS_THEME_CLASS);
                 createHolidayGif("chrm.gif");
                 configureTitle("Will you be my christmas present? 🎁");
+                configureContractOverlay("chrmcont.png");
                 break;
             default:
                 addClassName(VALENTINE_THEME_CLASS);
@@ -102,27 +105,32 @@ public class HomeView extends VerticalLayout {
         }
     }
 
-    private void configureContractOverlay() {
-        contractOverlay = new Div();
-        contractOverlay.setId("contract-overlay");
-        contractOverlay.setVisible(false);
-        Image contractImage = new Image("place.png", "Valentine Contract");
-        contractImage.getStyle()
-            .set("max-width", "90%")
-            .set("max-height", "90%")
-            .set("object-fit", "contain");
-        contractOverlay.add(contractImage);
-        contractOverlay.getStyle()
-            .set("position", "fixed")
-            .set("top", "0")
-            .set("left", "0")
-            .set("width", "100vw")
-            .set("height", "100vh")
-            .set("background", "rgba(0, 0, 0, 0.9)")
-            .set("display", "flex")
-            .set("align-items", "center")
-            .set("justify-content", "center")
-            .set("z-index", "99999");
+    private Image contractImage;
+    private void configureContractOverlay(String src) {
+        if (contractOverlay == null) {
+            contractOverlay = new Div();
+            contractOverlay.setId("contract-overlay");
+            contractOverlay.setVisible(false);
+            contractImage = new Image(src, "Contract Image");
+            contractImage.getStyle()
+                .set("max-width", "90%")
+                .set("max-height", "90%")
+                .set("object-fit", "contain");
+            contractOverlay.add(contractImage);
+            contractOverlay.getStyle()
+                .set("position", "fixed")
+                .set("top", "0")
+                .set("left", "0")
+                .set("width", "100vw")
+                .set("height", "100vh")
+                .set("background", "rgba(0, 0, 0, 0.9)")
+                .set("display", "flex")
+                .set("align-items", "center")
+                .set("justify-content", "center")
+                .set("z-index", "99999");
+        } else if (contractImage != null) {
+            contractImage.setSrc(src);
+        }
     }
 
     private void configureCard() {
