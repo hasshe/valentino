@@ -33,43 +33,10 @@ public class HomeView extends VerticalLayout {
         themeSelector.setValue("Valentine");
         IO.print(themeSelector.getValue());
 
-        themeSelector.addValueChangeListener(event -> {
-            String theme = event.getValue();
-                switch (theme) {
-                    case "Halloween":
-                        removeClassName(CHRISTMAS_THEME_CLASS);
-                        removeClassName(EASTER_THEME_CLASS);
-                        addClassName(HALLOWEEN_THEME_CLASS);
-                        break;
-                    case "Easter":
-                        removeClassName(CHRISTMAS_THEME_CLASS);
-                        removeClassName(HALLOWEEN_THEME_CLASS);
-                        addClassName(EASTER_THEME_CLASS);
-                        break;
-                    case "Valentine":
-                        removeClassName(CHRISTMAS_THEME_CLASS);
-                        removeClassName(EASTER_THEME_CLASS);
-                        removeClassName(HALLOWEEN_THEME_CLASS);
-                        addClassName(VALENTINE_THEME_CLASS);
-                        break;
-                    case "Christmas":
-                        removeClassName(VALENTINE_THEME_CLASS);
-                        removeClassName(EASTER_THEME_CLASS);
-                        removeClassName(HALLOWEEN_THEME_CLASS);
-                        addClassName(CHRISTMAS_THEME_CLASS);
-                        break;
-                    default:
-                        addClassName(VALENTINE_THEME_CLASS);
-                }
-        });
-
-        if (themeSelector.getValue().equals("Valentine")) {
-            addClassName(VALENTINE_THEME_CLASS);
-        }
+        setHolidayTheme();
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
-        createValentineGif();
         configurePopupGif();
         configureTitle();
         configureCard();
@@ -78,6 +45,47 @@ public class HomeView extends VerticalLayout {
         createButtonLayout();
 
         add(themeSelector, valentinesGif, title, buttonLayout, popupGif, card, contractOverlay);
+    }
+
+    private void setHolidayTheme() {
+        themeSelector.addValueChangeListener(event -> {
+            String theme = event.getValue();
+                switch (theme) {
+                    case "Halloween":
+                        removeClassName(CHRISTMAS_THEME_CLASS);
+                        removeClassName(EASTER_THEME_CLASS);
+                        addClassName(HALLOWEEN_THEME_CLASS);
+                        createValentineGif("hallo.gif");
+                        break;
+                    case "Easter":
+                        removeClassName(CHRISTMAS_THEME_CLASS);
+                        removeClassName(HALLOWEEN_THEME_CLASS);
+                        addClassName(EASTER_THEME_CLASS);
+                        createValentineGif("pengu.gif");
+                        break;
+                    case "Valentine":
+                        removeClassName(CHRISTMAS_THEME_CLASS);
+                        removeClassName(EASTER_THEME_CLASS);
+                        removeClassName(HALLOWEEN_THEME_CLASS);
+                        addClassName(VALENTINE_THEME_CLASS);
+                        createValentineGif("hlg.gif");
+                        break;
+                    case "Christmas":
+                        removeClassName(VALENTINE_THEME_CLASS);
+                        removeClassName(EASTER_THEME_CLASS);
+                        removeClassName(HALLOWEEN_THEME_CLASS);
+                        addClassName(CHRISTMAS_THEME_CLASS);
+                        createValentineGif("chrm.gif");
+                        break;
+                    default:
+                        addClassName(VALENTINE_THEME_CLASS);
+                }
+        });
+
+        if (themeSelector.getValue().equals("Valentine")) {
+            addClassName(VALENTINE_THEME_CLASS);
+            createValentineGif("hlg.gif");
+        }
     }
 
     private void configureTitle() {
@@ -125,10 +133,14 @@ public class HomeView extends VerticalLayout {
         card.setMedia(new Image());
     }
 
-    private void createValentineGif() {
-        valentinesGif = new Image("hlg.gif", "Valentine GIF");
-        valentinesGif.setWidth("200px");
-        valentinesGif.setHeight("200px");
+    private void createValentineGif(String src) {
+        if (valentinesGif == null) {
+            valentinesGif = new Image(src, "GIF");
+            valentinesGif.setWidth("200px");
+            valentinesGif.setHeight("200px");
+        } else {
+            valentinesGif.setSrc(src);
+        }
     }
 
     private void configurePopupGif() {
