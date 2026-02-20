@@ -1,6 +1,6 @@
-# 💕 Valentino - Valentine's Day Web App
+# 🎉 Valentino - Holiday Web App
 
-A fun and interactive Valentine's Day web application built with **Vaadin** and **Spring Boot**.
+A fun and interactive holiday web application built with **Vaadin** and **Spring Boot**. Supports Valentine's Day, Easter, Halloween, and Christmas themes, with dynamic theme selection based on the current date.
 
 ![Java](https://img.shields.io/badge/Java-25-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.2-green)
@@ -8,11 +8,11 @@ A fun and interactive Valentine's Day web application built with **Vaadin** and 
 
 ## ✨ Features
 
-- 🎀 **Beautiful Valentine's Theme** - Pink gradient background with custom styling
-- 🖼️ **Animated GIFs** - Valentine's Day animations
+- 🌈 **Multiple Holiday Themes** - Automatically switches between Valentine's, Easter, Halloween, and Christmas based on the date
+- 🖼️ **Animated GIFs** - Holiday-specific animations
 - 🏃 **Runaway "NO" Button** - The NO button escapes the cursor when you try to click it
 - 😜 **Popup GIF on Hover** - A GIF appears when the NO button runs away
-- 📜 **Contract Overlay** - When they click YES, show them the "Valentine Contract" they can't close
+- 📜 **Contract Overlay** - Shows a custom contract image for each holiday when YES is clicked
 - 💅 **Lumo Theme Integration** - Uses Vaadin's Lumo theme variables for consistent styling
 
 ## 🚀 Getting Started
@@ -49,14 +49,20 @@ src/main/
 ├── java/com/valentino/
 │   ├── ValentinoApplication.java    # Spring Boot main class
 │   └── views/
-│       └── HomeView.java            # Main Valentine's view
+│       └── HomeView.java            # Main view (handles all holidays)
 └── resources/
-    ├── META-INF/resources/
-    │   ├── styles.css               # Valentine's theme CSS
-    │   ├── hlg.gif                  # Main Valentine GIF
-    │   ├── tgg.gif                  # Popup GIF for NO button
-    │   └── gpt-contract.png         # Valentine contract image
-    └── application.properties
+   ├── META-INF/resources/
+   │   ├── styles.css               # Holiday theme CSS
+   │   ├── hlg.gif                  # Valentine GIF
+   │   ├── pengu.gif                # Easter GIF
+   │   ├── hallo.gif                # Halloween GIF
+   │   ├── chrm.gif                 # Christmas GIF
+   │   ├── tgg.gif                  # Popup GIF for NO button
+   │   ├── valcont.png              # Valentine contract image
+   │   ├── eastbny.png              # Easter contract image
+   │   ├── hallowcont.png           # Halloween contract image
+   │   └── chrmcont.png             # Christmas contract image
+   └── application.properties
 ```
 
 ## 🎨 Customization
@@ -65,15 +71,21 @@ src/main/
 
 Place your images in `src/main/resources/META-INF/resources/`:
 
-- `hlg.gif` - Main GIF displayed on the page
+- `hlg.gif` - Valentine GIF
+- `pengu.gif` - Easter GIF
+- `hallo.gif` - Halloween GIF
+- `chrm.gif` - Christmas GIF
 - `tgg.gif` - GIF that appears when NO button runs away
-- `placeholder.png` - Contract image shown on YES click
+- `valcont.png` - Valentine contract image
+- `eastbny.png` - Easter contract image
+- `hallowcont.png` - Halloween contract image
+- `chrmcont.png` - Christmas contract image
 
 ### Modifying the Theme
 
 Edit `src/main/resources/META-INF/resources/styles.css` to customize:
 
-- Background gradients
+- Background gradients for each holiday
 - Button colors
 - Card animations
 - Typography
